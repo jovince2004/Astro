@@ -50,26 +50,33 @@ const intro = gsap.timeline({
 		ease: "power2.out",
 	},
 });
+const sectionAnimations = [];
 
 intro
 	.from("header h1", { y: -40, opacity: 0 })
 	.from("header nav a", { y: -20, opacity: 0, stagger: 0.15 }, "-=0.4");
 
-replayButton?.addEventListener("click", () => intro.restart());
+replayButton?.addEventListener("click", () => {
+	window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+	intro.restart();
+	sectionAnimations.forEach((animation) => animation.restart());
+});
 
 if (!reduceMotion) {
 	gsap.utils.toArray("main #layoutGroup > section").forEach((section) => {
-		gsap.from(section, {
-			y: 50,
-			opacity: 0,
-			duration: 0.8,
-			ease: "power2.out",
-			scrollTrigger: {
-				trigger: section,
-				start: "top 85%",
-				toggleActions: "play none none reverse",
-			},
-		});
+		sectionAnimations.push(
+			gsap.from(section, {
+				y: 50,
+				opacity: 0,
+				duration: 0.8,
+				ease: "power2.out",
+				scrollTrigger: {
+					trigger: section,
+					start: "top 85%",
+					toggleActions: "play none none reverse",
+				},
+			}),
+		);
 	});
 
 	gsap.fromTo(
