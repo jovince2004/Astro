@@ -1,3 +1,42 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark*));
+@custom-variant dark (&:where(.dark, .dark *));
+
+ @theme {
+            --color-main: #92EEFF;
+            --color-secondary: #30AFFF;
+            --color-accent: #C4F7CA;
+
+            --color-dark-main: #091413;
+            --color-dark-secondary: #408A71;
+            --color-dark-accent: #B0E4CC;
+        }
+
+        @layer base {
+            .body-theme {
+                @apply bg-main text-center text-white dark:bg-dark-main;
+            }
+        }
+
+        @layer components {
+            .btn-primary {
+                @apply rounded-xl bg-accent px-6 py-3 font-semibold text-dark-main transition-colors hover:opacity-80 dark:bg-dark-accent dark:text-white;
+            }
+
+            .btn-secondary {
+                @apply rounded-3xl bg-secondary p-8 text-dark-main dark:bg-dark-secondary dark:text-white;
+                box-shadow: 8px 8px 18px #17647b, -8px -8px 18px #2fa7c1;
+            }
+
+            .dark .btn-secondary {
+                box-shadow: 8px 8px 18px #080808, -8px -8px 18px #303b50;
+            }
+
+            .section-title {
+                @apply mb-3 text-2xl font-bold text-main dark:text-dark-accent;
+            }
+
+            .btn-accent {
+                @apply transition-colors duration-300 hover:text-accent dark:hover:text-dark-accent;
+            }
+        }

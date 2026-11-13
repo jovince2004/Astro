@@ -1,10 +1,34 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const name = "Jovince Dela Cruz";
-const position = "Net Admin";
+import About from "./index/sections/About.astro";
+import Contact from "./index/sections/Contact.astro";
+import Hero from "./index/sections/Hero.astro";
+import Project from "./index/sections/Project.astro";
 ---
 
 <BaseLayout>
-	<h1 class="text-red-700">{name} | {position}</h1>
+	<div class="flex flex-wrap justify-center gap-4">
+		<button
+			id="toggledark"
+			class="btn-primary"
+			type="button"
+			aria-pressed="false"
+		>
+			Toggle theme
+		</button>
+		<button id="changeLayout" class="btn-primary" type="button">
+			Change layout
+		</button>
+		<button id="replayBtn" class="btn-primary" type="button">
+			Replay intro
+		</button>
+	</div>
+
+	<div id="layoutGroup" class="grid grid-cols-1 gap-8">
+		<Hero />
+		<About />
+		<Project />
+		<Contact />
+	</div>
 </BaseLayout>
 
